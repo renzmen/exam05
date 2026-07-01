@@ -1,16 +1,29 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "bsq.h"
 
-// Definizione della struttura come nel tuo bsq.h
-typedef struct {
-    int rows;
-    int cols;
-    char empty;
-    char obstacle;
-    char full;
-    char **map;
-} t_map;
+static ssize_t getline(char **lineptr, size_t *n, FILE *stream) {
+    if (!lineptr || !n || !stream) return -1;
+    if (*lineptr == NULL || *n == 0) {
+        *n = 128;
+        *lineptr = malloc(*n);
+        if (*lineptr == NULL) return -1;
+    }
+    size_t pos = 0;
+    int c;
+    while ((c = fgetc(stream)) != EOF) {
+        if (pos + 1 >= *n) {
+            size_t new_size = *n * 2;
+            char *new_ptr = realloc(*lineptr, new_size);
+            if (!new_ptr) return -1;
+            *lineptr = new_ptr;
+            *n = new_size;
+        }
+        (*lineptr)[pos++] = c;
+        if (c == '\n') break;
+    }
+    if (pos == 0) return -1;
+    (*lineptr)[pos] = '\0';
+    return pos;
+}
 
 static int ft_strlen(const char *s)
 {

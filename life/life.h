@@ -13,5 +13,4 @@ typedef struct s_map
     char **matrix;
 } t_map;
 
-// Prototipi se dividi in più file, altrimenti basta questo
 #endif

@@ -39,4 +39,11 @@ int main()
     std::cout << "(d >= a) = " << (d >= a) << std::endl;
     std::cout << "(d == a) = " << (d == a) << std::endl;
     std::cout << "(d != a) = " << (d != a) << std::endl;
+
+  // Test overflow dello shift (creiamo un numero gigante tramite lo shift)
+    bigint enorme(10);
+    bigint shift_gigante(9999);
+    shift_gigante <<= 20; // Ora shift_gigante è un numero enorme con tantissimi zeri!
+    
+    std::cout << "Test shift estremo: " << (enorme >> shift_gigante) << std::endl;
 }

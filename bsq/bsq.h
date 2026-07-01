@@ -1,6 +1,16 @@
 #ifndef BSQ_H
 # define BSQ_H
 
+####################
+#define _GNU_SOURCE
+
+#ifdef _WIN32
+# include <sys/types.h>
+# ifndef ssize_t
+typedef long long ssize_t;
+# endif
+#endif
+####################
 
 # include <stdlib.h>
 # include <stdio.h>
